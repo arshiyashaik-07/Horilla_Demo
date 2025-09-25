@@ -1,0 +1,22 @@
+name: CI/CD pipeline-Horilla_Demo (django)
+on:
+ push: 
+   branches:
+      - main:
+jobs:
+  build-and-analyze:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: setup python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install Dependencies
+      run:
+         python manage.py makemigrations
+          python manage.py migrate
+          python manage.py test
+      
